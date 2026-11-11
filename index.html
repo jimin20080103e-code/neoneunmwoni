@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f5ca28">
+<meta name="theme-color" content="#171b19">
 <title>너는뭐니? | 무인도 생존 테스트</title>
 <meta name="description" content="당신이 어떤 인간인지, 저희도 궁금합니다. 무인도 생존 테스트 TEST NO.001">
 
@@ -14,13 +14,15 @@
 
 <style>
 :root {
-  --yellow: #f5ca28;
-  --black: #171717;
-  --white: #ffffff;
-  --red: #ed4438;
-  --gray: #777777;
-  --light: #f5f5f2;
-  --line: #e7e7e2;
+  --bg: #171b19;
+  --panel: #222824;
+  --panel-light: #2b332e;
+  --yellow: #d7b83d;
+  --white: #e8e5da;
+  --muted: #9ba39a;
+  --red: #a83a2b;
+  --line: #424a43;
+  --font: 'Noto Sans KR', sans-serif;
 }
 
 * {
@@ -29,9 +31,9 @@
 
 body {
   margin: 0;
-  background: var(--white);
-  color: var(--black);
-  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--font);
   word-break: keep-all;
 }
 
@@ -41,8 +43,8 @@ button {
 }
 
 button:focus-visible {
-  outline: 3px solid var(--red);
-  outline-offset: 3px;
+  outline: 3px solid var(--yellow);
+  outline-offset: 4px;
 }
 
 #app {
@@ -50,133 +52,125 @@ button:focus-visible {
 }
 
 .site-header {
-  height: 72px;
-  border-bottom: 1px solid var(--line);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  height: 70px;
   padding: 0 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  background: rgba(23,27,25,.96);
 }
 
 .logo {
   font-family: 'Black Han Sans', sans-serif;
   font-size: 25px;
-  letter-spacing: -1.5px;
+  letter-spacing: -1px;
 }
 
 .logo span {
-  color: var(--red);
+  color: var(--yellow);
 }
 
 .header-label {
-  font-size: 11px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
   font-weight: 800;
-  letter-spacing: 1.5px;
 }
 
 .page {
-  max-width: 760px;
+  width: min(100% - 40px, 820px);
   margin: auto;
-  padding: 55px 24px 75px;
+  padding: 55px 0 80px;
 }
 
 .eyebrow {
-  font-size: 12px;
+  color: var(--yellow);
+  font-size: 11px;
   font-weight: 900;
-  letter-spacing: 2px;
-  color: var(--red);
-  margin-bottom: 14px;
+  letter-spacing: 2.5px;
+  margin-bottom: 17px;
 }
 
 .main-title {
   font-family: 'Black Han Sans', sans-serif;
-  font-size: clamp(42px, 8vw, 69px);
-  line-height: 1.13;
+  font-size: clamp(43px, 8vw, 72px);
+  line-height: 1.2;
   letter-spacing: -2px;
   margin: 0;
 }
 
 .main-title .yellow-text {
   color: var(--yellow);
-  text-shadow: 2px 2px 0 var(--black);
 }
 
 .intro {
-  color: #666;
+  color: #b4b9b0;
   font-size: 14px;
-  line-height: 1.9;
-  margin: 22px 0 25px;
+  line-height: 1.95;
+  margin: 22px 0 28px;
 }
 
 .hero-image {
   position: relative;
-  height: 340px;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 260px;
+  max-height: 470px;
   overflow: hidden;
-  border: 2px solid var(--black);
-  background:
-    linear-gradient(0deg, rgba(0,0,0,.32), transparent 60%),
-    url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=1200&auto=format&fit=crop&q=85') center 52% / cover;
+  background: #303b35;
+  border: 1px solid #59645a;
 }
 
-.hero-stamp {
-  position: absolute;
-  top: 18px;
-  left: 18px;
-  background: var(--yellow);
-  border: 2px solid var(--black);
-  padding: 8px 12px;
-  font-size: 11px;
-  font-weight: 900;
-  transform: rotate(-3deg);
-}
-
-.hero-caption {
-  position: absolute;
-  bottom: 20px;
-  left: 22px;
-  color: white;
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: clamp(25px, 5vw, 40px);
-  text-shadow: 2px 2px 4px #000;
+.hero-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  transform: scale(1.15);
 }
 
 .start-button {
   width: 100%;
-  height: 66px;
-  margin-top: 22px;
-  border: 2px solid var(--black);
+  min-height: 68px;
+  margin-top: 25px;
   background: var(--yellow);
-  font-size: 18px;
+  color: #171b19;
+  border: 0;
+  font-size: 17px;
   font-weight: 900;
-  box-shadow: 5px 5px 0 var(--black);
-  transition: .15s;
+  letter-spacing: -.3px;
+  transition: .2s;
 }
 
 .start-button:hover {
-  transform: translate(2px, 2px);
-  box-shadow: 3px 3px 0 var(--black);
+  background: #ecd05c;
+  transform: translateY(-2px);
 }
 
 .info-row {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 22px;
   margin-top: 25px;
+  color: var(--muted);
   font-size: 11px;
-  color: var(--gray);
   font-weight: 700;
 }
 
 .section-divider {
   border: 0;
   border-top: 1px solid var(--line);
-  margin: 35px 0;
+  margin: 42px 0 30px;
 }
 
 .small-heading {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 900;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+  color: var(--yellow);
 }
 
 .question-top {
@@ -188,19 +182,21 @@ button:focus-visible {
 
 .question-number {
   font-family: 'Black Han Sans', sans-serif;
-  font-size: 17px;
+  font-size: 19px;
+  letter-spacing: 1px;
 }
 
 .question-count {
-  color: var(--gray);
-  font-size: 12px;
+  color: var(--muted);
+  font-size: 11px;
   font-weight: 800;
+  letter-spacing: 1px;
 }
 
 .progress-track {
-  height: 8px;
-  background: #eeeeea;
-  margin-bottom: 38px;
+  height: 5px;
+  background: #343c36;
+  margin-bottom: 48px;
   overflow: hidden;
 }
 
@@ -212,53 +208,54 @@ button:focus-visible {
 
 .question-title {
   font-family: 'Black Han Sans', sans-serif;
-  font-size: clamp(27px, 5vw, 38px);
+  font-size: clamp(28px, 5vw, 42px);
   line-height: 1.4;
-  margin: 0 0 12px;
+  margin: 0 0 13px;
   letter-spacing: -.8px;
 }
 
 .question-subtitle {
-  font-size: 13px;
-  color: var(--gray);
-  margin-bottom: 27px;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 30px;
 }
 
 .answer-list {
   display: grid;
-  gap: 12px;
+  gap: 11px;
 }
 
 .answer-button {
-  text-align: left;
   width: 100%;
-  min-height: 76px;
-  padding: 17px 18px;
-  background: white;
-  border: 1.5px solid #deded9;
+  min-height: 78px;
+  padding: 18px 20px;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 17px;
+  text-align: left;
+  color: var(--white);
+  background: var(--panel);
+  border: 1px solid var(--line);
   font-size: 14px;
-  font-weight: 700;
-  line-height: 1.65;
-  transition: .15s;
+  font-weight: 600;
+  line-height: 1.7;
+  transition: .18s;
 }
 
 .answer-button:hover {
-  border-color: var(--black);
-  background: #fffdf2;
-  transform: translateY(-2px);
+  border-color: var(--yellow);
+  background: var(--panel-light);
+  transform: translateX(3px);
 }
 
 .answer-letter {
   flex-shrink: 0;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   display: grid;
   place-items: center;
-  background: var(--light);
-  border: 1px solid var(--line);
+  color: var(--yellow);
+  background: #343c36;
   font-size: 12px;
   font-weight: 900;
 }
@@ -266,13 +263,14 @@ button:focus-visible {
 .question-bottom {
   display: flex;
   justify-content: space-between;
-  margin-top: 30px;
+  align-items: center;
+  margin-top: 32px;
 }
 
 .back-button {
   border: 0;
   background: transparent;
-  color: var(--gray);
+  color: var(--muted);
   font-size: 12px;
   font-weight: 800;
   padding: 10px 0;
@@ -285,104 +283,109 @@ button:focus-visible {
 
 .result-label {
   display: inline-block;
+  padding: 8px 13px;
+  color: var(--bg);
   background: var(--yellow);
-  border: 1.5px solid var(--black);
-  padding: 8px 12px;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 900;
-  letter-spacing: 1px;
-  transform: rotate(-2deg);
+  letter-spacing: 1.5px;
   margin-bottom: 22px;
 }
 
 .result-card {
-  border: 2px solid var(--black);
-  background: #fff;
-  box-shadow: 7px 7px 0 var(--black);
+  border: 1px solid #687166;
+  background: var(--panel);
   overflow: hidden;
 }
 
 .result-card-top {
-  padding: 25px;
-  background: var(--yellow);
-  border-bottom: 2px solid var(--black);
+  padding: 30px;
+  background: #303a32;
+  border-bottom: 1px solid #59645a;
 }
 
 .result-card-top .mini {
   font-size: 10px;
+  color: var(--yellow);
   font-weight: 900;
   letter-spacing: 2px;
 }
 
 .result-card-top h2 {
   font-family: 'Black Han Sans', sans-serif;
-  font-size: clamp(31px, 6vw, 49px);
-  line-height: 1.25;
-  margin: 15px 0 7px;
+  font-size: clamp(33px, 6vw, 52px);
+  line-height: 1.3;
+  margin: 18px 0 9px;
 }
 
 .result-card-top p {
   font-size: 12px;
-  font-weight: 800;
+  color: #c2c8bd;
+  font-weight: 700;
   margin: 0;
 }
 
 .result-illustration {
-  min-height: 185px;
+  min-height: 190px;
   display: grid;
   place-items: center;
-  background: #f4f2e9;
-  border-bottom: 1.5px solid var(--black);
   position: relative;
+  background: #242d27;
+  border-bottom: 1px solid var(--line);
 }
 
 .result-emoji {
   font-size: 105px;
-  filter: drop-shadow(4px 5px 0 rgba(0,0,0,.13));
+  filter: drop-shadow(4px 6px 8px rgba(0,0,0,.3));
 }
 
 .result-illustration::after {
   content: "SURVIVAL REPORT";
   position: absolute;
-  right: 14px;
-  bottom: 12px;
+  right: 18px;
+  bottom: 14px;
   font-size: 9px;
+  color: #8d978c;
   font-weight: 900;
   letter-spacing: 2px;
 }
 
 .result-card-content {
-  padding: 25px;
+  padding: 28px;
 }
 
 .result-description {
   font-size: 14px;
-  line-height: 1.9;
-  font-weight: 600;
-  margin: 0 0 24px;
+  line-height: 2;
+  font-weight: 500;
+  margin: 0 0 27px;
+  color: #e0e2d9;
 }
 
 .result-detail {
-  padding: 17px;
-  background: var(--light);
+  padding: 19px;
+  background: #2a332d;
+  border-left: 3px solid var(--yellow);
   margin-top: 12px;
 }
 
 .result-detail .detail-title {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 900;
-  color: var(--red);
-  margin-bottom: 8px;
+  color: var(--yellow);
+  letter-spacing: 1.5px;
+  margin-bottom: 9px;
 }
 
 .result-detail p {
   font-size: 13px;
-  line-height: 1.8;
+  line-height: 1.9;
+  color: #d2d7ce;
   margin: 0;
 }
 
 .survival-score {
-  margin-top: 23px;
+  margin-top: 28px;
 }
 
 .survival-score-title {
@@ -390,25 +393,25 @@ button:focus-visible {
   justify-content: space-between;
   font-size: 12px;
   font-weight: 900;
-  margin-bottom: 10px;
+  margin-bottom: 11px;
 }
 
 .score-bar {
-  height: 12px;
-  border: 1px solid var(--black);
-  background: #eee;
+  height: 9px;
+  background: #414a43;
 }
 
 .score-bar-fill {
   height: 100%;
-  background: var(--red);
+  background: var(--yellow);
+  transition: width .3s;
 }
 
 .result-code {
-  margin-top: 20px;
+  margin-top: 22px;
   text-align: right;
   font-size: 10px;
-  color: #888;
+  color: #929b90;
   letter-spacing: 1px;
   font-weight: 800;
 }
@@ -416,43 +419,51 @@ button:focus-visible {
 .result-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 24px;
+  gap: 11px;
+  margin-top: 25px;
 }
 
 .action-button {
-  min-height: 54px;
-  border: 1.5px solid var(--black);
+  min-height: 55px;
+  border: 1px solid #667066;
+  color: var(--white);
   font-weight: 900;
   font-size: 13px;
-  background: white;
+  background: var(--panel);
+  transition: .15s;
+}
+
+.action-button:hover {
+  border-color: var(--yellow);
 }
 
 .action-button.primary {
   background: var(--yellow);
+  color: var(--bg);
+  border-color: var(--yellow);
 }
 
 .action-button.full {
   grid-column: 1 / -1;
-  background: var(--black);
-  color: white;
+  background: #39433c;
+  border-color: #59645a;
 }
 
 .result-footer {
   font-size: 11px;
-  color: var(--gray);
-  line-height: 1.8;
-  margin-top: 24px;
+  color: var(--muted);
+  line-height: 1.9;
+  margin-top: 26px;
   text-align: center;
 }
 
 .site-footer {
   border-top: 1px solid var(--line);
-  padding: 27px 20px;
+  padding: 28px 20px;
   text-align: center;
   font-size: 10px;
-  color: #999;
-  line-height: 1.8;
+  color: #778078;
+  line-height: 1.9;
 }
 
 .hidden {
@@ -466,15 +477,21 @@ button:focus-visible {
   }
 
   .page {
-    padding: 42px 20px 55px;
+    width: calc(100% - 40px);
+    padding: 42px 0 58px;
   }
 
   .hero-image {
-    height: 245px;
+    aspect-ratio: 4 / 3;
+    min-height: 230px;
+  }
+
+  .hero-image img {
+    transform: scale(1.18);
   }
 
   .info-row {
-    gap: 12px;
+    gap: 13px;
     font-size: 10px;
   }
 
@@ -484,8 +501,12 @@ button:focus-visible {
     font-size: 13px;
   }
 
+  .result-card-top {
+    padding: 23px;
+  }
+
   .result-card-content {
-    padding: 18px;
+    padding: 19px;
   }
 }
 </style>
@@ -503,6 +524,7 @@ button:focus-visible {
 
 <!-- 시작 화면 -->
 <section id="home" class="page">
+
   <div class="eyebrow">TEST NO.001 / SURVIVAL</div>
 
   <h1 class="main-title">
@@ -517,12 +539,11 @@ button:focus-visible {
   </p>
 
   <div class="hero-image">
-    <div class="hero-stamp">HUMAN ANALYSIS FILE.001</div>
-    <div class="hero-caption">WELCOME TO THE ISLAND.</div>
+    <img src="images/main.png" alt="무인도에 표류한 남성">
   </div>
 
   <button class="start-button" onclick="startTest()">
-    내 생존 유형 확인하기 →
+    생존 유형 확인하기 →
   </button>
 
   <div class="info-row">
@@ -542,6 +563,7 @@ button:focus-visible {
 
 <!-- 질문 화면 -->
 <section id="quiz" class="page hidden">
+
   <div class="question-top">
     <div class="question-number" id="questionNumber">QUESTION 01</div>
     <div class="question-count" id="questionCount">01 / 12</div>
@@ -552,6 +574,7 @@ button:focus-visible {
   </div>
 
   <h2 class="question-title" id="questionTitle"></h2>
+
   <p class="question-subtitle" id="questionSubtitle">
     가장 나다운 선택을 골라주세요.
   </p>
@@ -562,16 +585,18 @@ button:focus-visible {
     <button class="back-button" id="backButton" onclick="previousQuestion()">
       ← 이전 질문
     </button>
-    <span class="question-count">너는뭐니? HUMAN TEST LAB.</span>
+    <span class="question-count">HUMAN TEST LAB.</span>
   </div>
 </section>
 
 <!-- 결과 화면 -->
 <section id="result" class="page hidden">
+
   <div class="eyebrow">ANALYSIS COMPLETE / TEST NO.001</div>
   <div class="result-label">YOUR SURVIVAL TYPE</div>
 
   <div class="result-card" id="resultCard">
+
     <div class="result-card-top">
       <div class="mini">HUMAN ANALYSIS REPORT / NO.001</div>
       <h2 id="resultName"></h2>
@@ -1139,27 +1164,27 @@ function downloadResult() {
   canvas.width = 1080;
   canvas.height = 1350;
 
-  ctx.fillStyle = "#f5ca28";
+  ctx.fillStyle = "#d7b83d";
   ctx.fillRect(0, 0, 1080, 1350);
 
-  ctx.fillStyle = "#171717";
+  ctx.fillStyle = "#171b19";
   ctx.fillRect(50, 50, 980, 1250);
 
-  ctx.fillStyle = "#ffffff";
+  ctx.fillStyle = "#e8e5da";
   ctx.fillRect(68, 68, 944, 1214);
 
-  ctx.fillStyle = "#171717";
+  ctx.fillStyle = "#171b19";
   ctx.font = "bold 30px sans-serif";
   ctx.fillText("HUMAN TEST LAB.", 115, 145);
 
-  ctx.fillStyle = "#ed4438";
+  ctx.fillStyle = "#a83a2b";
   ctx.font = "bold 25px sans-serif";
   ctx.fillText("TEST NO.001 / SURVIVAL", 115, 210);
 
-  ctx.fillStyle = "#f5ca28";
+  ctx.fillStyle = "#d7b83d";
   ctx.fillRect(105, 260, 870, 370);
 
-  ctx.fillStyle = "#171717";
+  ctx.fillStyle = "#171b19";
   ctx.font = "bold 84px sans-serif";
   wrapCanvasText(ctx, r.name, 155, 390, 770, 105);
 
@@ -1171,14 +1196,14 @@ function downloadResult() {
   ctx.fillText(r.emoji, 540, 870);
   ctx.textAlign = "left";
 
-  ctx.fillStyle = "#171717";
+  ctx.fillStyle = "#171b19";
   ctx.font = "bold 34px sans-serif";
   ctx.fillText("SURVIVAL REPORT", 115, 1000);
 
   ctx.font = "30px sans-serif";
   wrapCanvasText(ctx, r.description, 115, 1060, 850, 48);
 
-  ctx.fillStyle = "#ed4438";
+  ctx.fillStyle = "#a83a2b";
   ctx.font = "bold 38px sans-serif";
   ctx.fillText("SURVIVAL " + r.survival + "%", 115, 1205);
 
