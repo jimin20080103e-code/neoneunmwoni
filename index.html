@@ -92,25 +92,7 @@ button:focus-visible {
   margin-bottom: 17px;
 }
 
-.main-title {
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: clamp(43px, 8vw, 72px);
-  line-height: 1.2;
-  letter-spacing: -2px;
-  margin: 0;
-}
-
-.main-title .yellow-text {
-  color: var(--yellow);
-}
-
-.intro {
-  color: #b4b9b0;
-  font-size: 14px;
-  line-height: 1.95;
-  margin: 22px 0 28px;
-}
-
+/* 메인 이미지 */
 .hero-image {
   position: relative;
   width: 100%;
@@ -118,7 +100,7 @@ button:focus-visible {
   min-height: 260px;
   max-height: 470px;
   overflow: hidden;
-  background: #303b35;
+  background: #171b19;
   border: 1px solid #59645a;
 }
 
@@ -127,26 +109,53 @@ button:focus-visible {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;
+  object-position: center;
   transform: scale(1.15);
 }
 
-.start-button {
+/* 제목 이미지 */
+.title-image {
+  display: block;
   width: 100%;
-  min-height: 68px;
-  margin-top: 25px;
-  background: var(--yellow);
-  color: #171b19;
+  max-width: 650px;
+  height: auto;
+  margin: 30px auto 15px;
+}
+
+/* 소개 문구 */
+.intro {
+  color: #b4b9b0;
+  font-size: 14px;
+  line-height: 1.95;
+  margin: 22px 0 28px;
+}
+
+/* 이미지형 시작 버튼 */
+.start-button {
+  display: block;
+  width: 100%;
+  max-width: 650px;
+  padding: 0;
+  margin: 22px auto 0;
   border: 0;
-  font-size: 17px;
-  font-weight: 900;
-  letter-spacing: -.3px;
+  background: transparent;
   transition: .2s;
 }
 
-.start-button:hover {
-  background: #ecd05c;
-  transform: translateY(-2px);
+.start-button img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform .2s;
+}
+
+.start-button:hover img {
+  transform: scale(1.02);
+}
+
+.start-button:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 5px;
 }
 
 .info-row {
@@ -490,6 +499,10 @@ button:focus-visible {
     transform: scale(1.18);
   }
 
+  .title-image {
+    margin-top: 24px;
+  }
+
   .info-row {
     gap: 13px;
     font-size: 10px;
@@ -527,10 +540,20 @@ button:focus-visible {
 
   <div class="eyebrow">TEST NO.001 / SURVIVAL</div>
 
-  <h1 class="main-title">
-    무인도에 떨어진 당신,<br>
-    <span class="yellow-text">생존 가능할까?</span>
-  </h1>
+  <!-- 무인도 + 남성 메인 이미지 -->
+  <div class="hero-image">
+    <img
+      src="images/KakaoTalk_20261111_195107524.png"
+      alt="무인도에 표류한 남성"
+    >
+  </div>
+
+  <!-- 제목 이미지 -->
+  <img
+    class="title-image"
+    src="images/KakaoTalk_20261111_195107524_01.png"
+    alt="무인도 생존 테스트 제목"
+  >
 
   <p class="intro">
     어느 날 갑자기 무인도에 떨어졌습니다.<br>
@@ -538,12 +561,12 @@ button:focus-visible {
     12개의 상황을 통해 당신이라는 인간을 분석합니다.
   </p>
 
-  <div class="hero-image">
-    <img src="images/main.png" alt="무인도에 표류한 남성">
-  </div>
-
+  <!-- 시작 버튼 이미지 -->
   <button class="start-button" onclick="startTest()">
-    생존 유형 확인하기 →
+    <img
+      src="images/KakaoTalk_20261111_195107524_02.png"
+      alt="생존 유형 확인하기"
+    >
   </button>
 
   <div class="info-row">
