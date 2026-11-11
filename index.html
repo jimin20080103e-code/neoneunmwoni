@@ -1,1 +1,547 @@
 
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>너는뭐니? | 무인도 생존 테스트</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap');
+
+:root {
+  --yellow: #ffdf32;
+  --black: #171717;
+  --red: #ed3939;
+  --white: #ffffff;
+  --gray: #eeeeee;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #fff;
+  color: var(--black);
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+button { font-family: inherit; cursor: pointer; }
+
+header {
+  max-width: 1050px;
+  margin: auto;
+  padding: 25px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--black);
+}
+
+.logo {
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: 29px;
+  letter-spacing: -1.5px;
+}
+
+.logo span { color: var(--red); }
+
+.header-label {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+main {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 35px 24px 80px;
+}
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: var(--red);
+}
+
+h1 {
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: clamp(36px, 7vw, 65px);
+  line-height: 1.2;
+  letter-spacing: -2px;
+  margin: 15px 0;
+}
+
+.description {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.hero-image {
+  width: 100%;
+  height: 360px;
+  margin: 28px 0 24px;
+  background: #e8e0c9;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.image-caption {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  background: var(--yellow);
+  padding: 9px 13px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.primary-button {
+  width: 100%;
+  border: 3px solid var(--black);
+  background: var(--yellow);
+  padding: 20px;
+  font-size: 19px;
+  font-weight: 900;
+  box-shadow: 5px 5px 0 var(--black);
+  transition: .15s;
+}
+
+.primary-button:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 var(--black);
+}
+
+.info {
+  margin-top: 20px;
+  font-size: 12px;
+  text-align: center;
+  color: #888;
+}
+
+.hidden { display: none !important; }
+
+#quiz { padding-top: 30px; }
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  height: 9px;
+  background: #eee;
+  margin-bottom: 40px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--yellow);
+  width: 0%;
+  transition: .3s;
+}
+
+.question-number {
+  color: var(--red);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.question {
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: clamp(27px, 5vw, 40px);
+  line-height: 1.4;
+  margin: 15px 0 30px;
+  word-break: keep-all;
+}
+
+.answers {
+  display: grid;
+  gap: 12px;
+}
+
+.answer {
+  background: white;
+  border: 2px solid var(--black);
+  padding: 19px;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.6;
+  transition: .15s;
+}
+
+.answer:hover {
+  background: var(--yellow);
+  transform: translateX(4px);
+}
+
+#result { text-align: center; padding-top: 35px; }
+
+.result-stamp {
+  display: inline-block;
+  background: var(--red);
+  color: white;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.result-type {
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: clamp(34px, 7vw, 55px);
+  margin: 20px 0 10px;
+  line-height: 1.3;
+}
+
+.result-emoji {
+  font-size: 85px;
+  margin: 20px 0;
+}
+
+.result-description {
+  background: #f5f5f5;
+  border: 2px solid var(--black);
+  padding: 25px;
+  text-align: left;
+  line-height: 1.9;
+  font-size: 14px;
+  white-space: pre-line;
+}
+
+.result-score {
+  margin: 20px 0;
+  font-weight: 900;
+  font-size: 13px;
+}
+
+.result-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.secondary-button {
+  background: white;
+  border: 2px solid var(--black);
+  padding: 16px 8px;
+  font-weight: 900;
+  font-size: 14px;
+}
+
+footer {
+  border-top: 1px solid #ddd;
+  padding: 25px;
+  text-align: center;
+  font-size: 11px;
+  color: #999;
+}
+
+@media(max-width:600px) {
+  header { padding: 18px; }
+  main { padding: 28px 19px 60px; }
+  .hero-image { height: 240px; }
+  .result-buttons { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="logo">너는뭐니<span>?</span></div>
+  <div class="header-label">YOUR HUMAN REPORT</div>
+</header>
+
+<main>
+<section id="home">
+  <div class="eyebrow">TEST NO.001 / SURVIVAL</div>
+  <h1>무인도에 떨어진 당신,<br>생존 가능할까?</h1>
+  <p class="description">
+    어느 날 갑자기 무인도에 떨어졌습니다.<br>
+    구조대가 올 때까지 당신은 살아남을 수 있을까요?<br>
+    당신의 선택으로 알아보는 무인도 생존 성향 테스트.
+  </p>
+
+  <div class="hero-image">
+    <img
+      src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=1200"
+      alt="바다와 섬"
+    >
+    <div class="image-caption">현재 위치 : 어딘지 모르는 섬</div>
+  </div>
+
+  <button class="primary-button" onclick="startTest()">
+    내 생존 가능성 확인하기 →
+  </button>
+
+  <div class="info">약 3분 소요 · 결과 공유 가능 · 총 8문항</div>
+</section>
+
+<section id="quiz" class="hidden">
+  <div class="progress-info">
+    <span id="questionCount">QUESTION 01</span>
+    <span id="progressPercent">12%</span>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+  <div class="question-number" id="questionCategory"></div>
+  <div class="question" id="questionText"></div>
+  <div class="answers" id="answers"></div>
+</section>
+
+<section id="result" class="hidden">
+  <div class="eyebrow">TEST NO.001 / YOUR RESULT</div>
+  <div class="result-stamp">생존자 분석 보고서</div>
+  <div class="result-emoji" id="resultEmoji"></div>
+  <div class="result-type" id="resultType"></div>
+  <div class="result-score" id="resultScore"></div>
+  <div class="result-description" id="resultDescription"></div>
+  <div class="result-buttons">
+    <button class="primary-button" onclick="shareResult()">결과 공유하기</button>
+    <button class="secondary-button" onclick="restartTest()">다시 테스트하기</button>
+  </div>
+</section>
+</main>
+
+<footer>
+  너는뭐니? © 2026 · 당신이 어떤 인간인지, 저희도 궁금합니다.
+</footer>
+
+<script>
+const questions = [
+  {
+    category: "01. 갑작스러운 상황",
+    text: "정신을 차려보니 낯선 무인도입니다. 가장 먼저 할 행동은?",
+    answers: [
+      ["주변을 둘러보며 상황부터 파악한다.", 3],
+      ["일단 살려달라고 소리친다.", 0],
+      ["소지품부터 확인한다.", 2],
+      ["누워서 현실을 부정한다.", 1]
+    ]
+  },
+  {
+    category: "02. 생존 본능",
+    text: "가방을 열어보니 물건이 딱 하나 남아 있습니다.",
+    answers: [
+      ["라이터. 불은 중요하니까.", 3],
+      ["거울. 구조 신호를 보내야지.", 3],
+      ["휴대폰. 아직 포기할 수 없다.", 1],
+      ["정체불명의 과자 한 봉지.", 0]
+    ]
+  },
+  {
+    category: "03. 위기 대처",
+    text: "해가 지기 시작합니다. 오늘 밤은 어떻게 보내시겠습니까?",
+    answers: [
+      ["나뭇가지와 잎으로 잠자리를 만든다.", 3],
+      ["동굴이나 안전한 장소를 찾는다.", 3],
+      ["일단 적당한 곳에 앉아 있는다.", 1],
+      ["무서워서 계속 돌아다닌다.", 0]
+    ]
+  },
+  {
+    category: "04. 인간관계",
+    text: "저 멀리 사람의 그림자가 보입니다. 어떻게 하시겠습니까?",
+    answers: [
+      ["반가워하며 먼저 다가간다.", 2],
+      ["상대가 누군지 멀리서 관찰한다.", 3],
+      ["일단 숨는다.", 1],
+      ["드디어 내 콘텐츠가 생겼다고 생각한다.", 0]
+    ]
+  },
+  {
+    category: "05. 식량 확보",
+    text: "먹을 것이 떨어졌습니다. 눈앞에 처음 보는 열매가 있습니다.",
+    answers: [
+      ["먹지 않고 다른 식량을 찾아본다.", 3],
+      ["조금 먹어보고 판단한다.", 0],
+      ["먹을 수 있는지 주변을 관찰한다.", 3],
+      ["그냥 굶는다.", 1]
+    ]
+  },
+  {
+    category: "06. 정신력",
+    text: "무인도 생활 3일째. 아직 구조대는 오지 않았습니다.",
+    answers: [
+      ["계획을 다시 세우고 버틴다.", 3],
+      ["이제 슬슬 적응한 것 같다.", 2],
+      ["내가 왜 여기 있는지 생각한다.", 1],
+      ["집에 가고 싶다. 매우.", 0]
+    ]
+  },
+  {
+    category: "07. 예상 밖의 변수",
+    text: "갑자기 비가 쏟아집니다. 당신의 반응은?",
+    answers: [
+      ["빗물을 모을 방법을 찾는다.", 3],
+      ["비를 피할 장소로 이동한다.", 3],
+      ["그냥 맞으면서 운명을 받아들인다.", 0],
+      ["비 오는 날 감성에 젖는다.", 1]
+    ]
+  },
+  {
+    category: "08. 최종 판단",
+    text: "멀리서 구조 헬기가 보입니다. 마지막으로 할 행동은?",
+    answers: [
+      ["눈에 띄는 구조 신호를 보낸다.", 3],
+      ["큰 소리로 도움을 요청한다.", 2],
+      ["그냥 손을 흔든다.", 1],
+      ["이 섬이 조금 아쉬워진다.", 0]
+    ]
+  }
+];
+
+let currentQuestion = 0;
+let totalScore = 0;
+
+function startTest() {
+  currentQuestion = 0;
+  totalScore = 0;
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  showQuestion();
+  window.scrollTo(0, 0);
+}
+
+function showQuestion() {
+  const q = questions[currentQuestion];
+  const number = currentQuestion + 1;
+  const percent = Math.round(number / questions.length * 100);
+
+  document.getElementById("questionCount").textContent =
+    "QUESTION " + String(number).padStart(2, "0") + " / 08";
+
+  document.getElementById("progressPercent").textContent =
+    percent + "%";
+
+  document.getElementById("progressFill").style.width =
+    percent + "%";
+
+  document.getElementById("questionCategory").textContent = q.category;
+  document.getElementById("questionText").textContent = q.text;
+
+  const answerArea = document.getElementById("answers");
+  answerArea.innerHTML = "";
+
+  q.answers.forEach((answer, index) => {
+    const button = document.createElement("button");
+    button.className = "answer";
+    button.textContent =
+      String.fromCharCode(65 + index) + ". " + answer[0];
+
+    button.onclick = () => selectAnswer(answer[1]);
+    answerArea.appendChild(button);
+  });
+}
+
+function selectAnswer(score) {
+  totalScore += score;
+  currentQuestion++;
+
+  if (currentQuestion < questions.length) {
+    showQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  document.getElementById("quiz").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+
+  let result;
+
+  if (totalScore >= 21) {
+    result = {
+      emoji: "🧭",
+      type: "무인도 CEO형 인간",
+      description:
+        "당신은 무인도에 떨어져도 일단 조직부터 만들 사람입니다.\n\n상황 파악, 판단, 행동까지 꽤 체계적입니다. 남들이 패닉에 빠져 있을 때 혼자 생존 계획서를 작성하고 있을 가능성이 높습니다.\n\n장점 : 위기 대처 능력과 계획성\n단점 : 혼자 다 하려고 하는 경향\n\n생존 가능성 : 상당히 높음"
+    };
+  } else if (totalScore >= 15) {
+    result = {
+      emoji: "🏕️",
+      type: "야무진 생존 실무자형",
+      description:
+        "생각보다 현실적인 사람입니다.\n\n필요한 순간에는 움직이고, 위험한 상황에서는 신중합니다. 무인도에서 꽤 오래 살아남을 수 있는 유형입니다.\n\n장점 : 현실적인 판단력\n단점 : 가끔 귀찮음이 판단력을 이김\n\n생존 가능성 : 높음"
+    };
+  } else if (totalScore >= 9) {
+    result = {
+      emoji: "🥥",
+      type: "운명에 맡기는 낭만주의자형",
+      description:
+        "생존보다 인생의 의미를 먼저 찾는 사람입니다.\n\n위기 상황에서도 나름의 여유를 잃지 않습니다. 다만 무인도는 낭만적인 여행지가 아닙니다.\n\n장점 : 높은 적응력과 긍정적인 태도\n단점 : 현실적인 대책이 부족할 수 있음\n\n생존 가능성 : 운에 따라 다름"
+    };
+  } else {
+    result = {
+      emoji: "🆘",
+      type: "구조대 단골 예약형 인간",
+      description:
+        "솔직히 구조대가 조금 걱정됩니다.\n\n계획보다 감정이 앞서고, 생존보다 집에 가고 싶은 마음이 큽니다. 그래도 살아남으려는 의지만큼은 인정합니다.\n\n장점 : 솔직함과 감정 표현\n단점 : 생존 전략이 조금 부족함\n\n생존 가능성 : 구조대에게 맡기겠습니다"
+    };
+  }
+
+  document.getElementById("resultEmoji").textContent = result.emoji;
+  document.getElementById("resultType").textContent = result.type;
+  document.getElementById("resultScore").textContent =
+    "생존 지수 : " + totalScore + " / 24";
+
+  document.getElementById("resultDescription").textContent =
+    result.description;
+
+  window.scrollTo(0, 0);
+}
+
+function restartTest() {
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("home").classList.remove("hidden");
+  window.scrollTo(0, 0);
+}
+
+async function shareResult() {
+  const type = document.getElementById("resultType").textContent;
+  const score = totalScore;
+
+  const shareText =
+    "나는 무인도 생존 테스트에서 [" + type + "]이 나왔습니다!\n" +
+    "생존 지수 : " + score + " / 24\n" +
+    "너는뭐니? - 무인도에 떨어진 당신, 생존 가능할까?";
+
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: "너는뭐니? 무인도 생존 테스트",
+        text: shareText,
+        url: location.href
+      });
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        alert("공유를 완료하지 못했습니다.");
+      }
+    }
+  } else {
+    try {
+      await navigator.clipboard.writeText(shareText + "\n" + location.href);
+      alert("결과가 복사되었습니다!");
+    } catch (error) {
+      alert(shareText);
+    }
+  }
+}
+</script>
+</body>
+</html>
